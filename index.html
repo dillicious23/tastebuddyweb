@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tastebuddy — Group Dining Solved</title>
+    <title>Tastebuddy — Dining Made Easy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +14,7 @@
             --text: #F1F5F9;
             --subtext: #94A3B8;
             --muted: #334155;
+            --safe-margin: 40px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,14 +27,13 @@
             overflow-x: hidden;
         }
 
-        /* --- Layout Containers --- */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 var(--safe-margin);
         }
 
-        /* --- Header --- */
+        /* --- Navigation --- */
         header {
             padding: 40px 0;
             display: flex;
@@ -61,11 +61,9 @@
             transition: transform 0.2s;
         }
 
-        .btn-download:hover { transform: scale(1.05); }
-
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
-            padding: 80px 0;
+            padding: 60px 0 100px;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 60px;
@@ -74,10 +72,10 @@
 
         .hero-text h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(50px, 8vw, 90px);
-            line-height: 0.9;
-            margin-bottom: 30px;
-            letter-spacing: -4px;
+            font-size: clamp(40px, 8vw, 80px);
+            line-height: 0.95;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
         }
 
         .hero-text h1 span { color: var(--green); display: block; }
@@ -86,14 +84,53 @@
             color: var(--subtext);
             font-size: 20px;
             max-width: 500px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
-        /* --- Step Section --- */
+        .tagline-badge {
+            font-family: 'Syne', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            border: 1px solid var(--muted);
+            padding: 6px 12px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* --- Feature Highlights --- */
+        .features-detailed {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--bg), var(--card));
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .feature-box h4 {
+            font-family: 'Syne', sans-serif;
+            color: var(--green);
+            margin-bottom: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        /* --- Steps Section --- */
         .steps {
             padding: 100px 0;
             background: var(--card);
-            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .step-grid {
@@ -104,12 +141,12 @@
 
         .step-card {
             padding: 40px;
-            border-left: 3px solid var(--green);
+            border-left: 2px solid var(--green);
         }
 
         .step-num {
             font-family: 'Syne', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             color: var(--green);
             margin-bottom: 20px;
             display: block;
@@ -117,33 +154,27 @@
         }
 
         .step-card h3 { font-family: 'Syne', sans-serif; font-size: 24px; margin-bottom: 15px; }
-        .step-card p { color: var(--subtext); font-size: 16px; }
 
-        /* --- Stats Section --- */
+        /* --- Stats Bar --- */
         .stats-bar {
-            padding: 80px 0;
+            padding: 100px 0;
             display: flex;
             justify-content: space-around;
             text-align: center;
         }
 
-        .stat-item h2 { font-family: 'Syne', sans-serif; font-size: 60px; color: var(--green); line-height: 1; }
-        .stat-item p { text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 700; font-size: 12px; }
+        .stat-item h2 { font-family: 'Syne', sans-serif; font-size: 50px; color: var(--green); line-height: 1; }
+        .stat-item p { text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 700; font-size: 11px; }
 
-        /* --- Footer --- */
         footer {
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .handle { color: var(--muted); font-size: 14px; margin-top: 10px; }
-
         @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-text p { margin: 0 auto 40px; }
-            .step-grid { grid-template-columns: 1fr; }
-            .stats-bar { flex-direction: column; gap: 40px; }
+            .hero, .feature-row, .step-grid { grid-template-columns: 1fr; }
+            .stats-bar { flex-direction: column; gap: 50px; }
         }
     </style>
 </head>
@@ -152,36 +183,61 @@
     <div class="container">
         <header>
             <div class="logo">taste<em>buddy</em></div>
-            <a href="#download" class="btn-download">Download Free</a>
+            <a href="#download" class="btn-download">Get the App</a>
         </header>
 
         <section class="hero">
             <div class="hero-text">
+                <span class="tagline-badge">Group Dining Solved</span>
                 <h1>Stop Arguing. <span>Start Eating.</span></h1>
-                <p>The fastest way to decide where to eat with the group. No drama. Just food.</p>
-                <div class="handle">Break the hangout loop.</div>
+                <p>Break the hangout loop with the fastest group decision maker ever built. No accounts. No drama. Just food.</p>
             </div>
-            <div style="width: 100%; aspect-ratio: 9/16; background: #141927; border: 8px solid #222; border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);"></div>
+            <div style="width: 100%; aspect-ratio: 9/16; background: #0B0F1A; border: 12px solid #141927; border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.8);"></div>
         </section>
     </div>
+
+    <section class="features-detailed">
+        <div class="container">
+            <div class="feature-row">
+                <div class="feature-box">
+                    <h4>Verified Open Now</h4>
+                    <p>We only show you places that are actually ready for you. No more driving to a restaurant just to find the "Closed" sign.</p>
+                </div>
+                <div class="feature-box">
+                    <h4>Strict Radius</h4>
+                    <p>Stop seeing results from 10 miles away. We keep it tight—if it's on the list, it's actually nearby.</p>
+                </div>
+            </div>
+            <div class="feature-row">
+                <div class="feature-box">
+                    <h4>Zero Accounts</h4>
+                    <p>Send a link to your crew and they can swipe instantly. No sign-ups or profile setup required for the group.</p>
+                </div>
+                <div class="feature-box">
+                    <h4>100% Agreement</h4>
+                    <p>The argument ends when the app finds a match. We only show you the spots where every single person agreed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="steps">
         <div class="container">
             <div class="step-grid">
                 <div class="step-card">
-                    <span class="step-num">01</span>
-                    <h3>Drop a Link</h3>
-                    <p>Start a session and send the invite link to the group chat. No accounts needed for the crew.</p>
+                    <span class="step-num">STEP 01</span>
+                    <h3>Invite the Crew</h3>
+                    <p>Drop a link in the group chat to start a session. The whole group joins in a single tap.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">02</span>
-                    <h3>Swipe Together</h3>
-                    <p>Everyone swipes on restaurants nearby in real-time. Only "Open Now" spots made the cut.</p>
+                    <span class="step-num">STEP 02</span>
+                    <h3>Everyone Swipes</h3>
+                    <p>Swipe on nearby restaurants. It's real-time, high-stakes, and surprisingly fun.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">03</span>
-                    <h3>It's a Match</h3>
-                    <p>Instantly see where everyone agreed. The decision is made—now go eat.</p>
+                    <span class="step-num">STEP 03</span>
+                    <h3>Go Eat</h3>
+                    <p>Instantly see where everyone agreed. Decision made, drama averted, food imminent.</p>
                 </div>
             </div>
         </div>
@@ -203,8 +259,9 @@
             </div>
         </section>
 
-        <footer>
-            <div class="logo">taste<em>buddy</em></div>
+        <footer id="download">
+            <div class="logo" style="font-size: 40px; margin-bottom: 20px;">taste<em>buddy</em></div>
+            <p style="color: var(--muted); margin-bottom: 30px;">Available on iOS & Android</p>
             <div class="handle">@usetastebuddy</div>
         </footer>
     </div>
