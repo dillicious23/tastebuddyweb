@@ -106,14 +106,17 @@
 
         .phone-mockup {
             width: 100%;
-            aspect-ratio: 9/16;
-            background: linear-gradient(145deg, #141927, #070B0F);
+            /* Updated aspect ratio for modern tall phones */
+            aspect-ratio: 9 / 19.5; 
+            background: #141927;
             border: 12px solid #1e2433;
             border-radius: 45px;
             box-shadow: 0 50px 100px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden; /* This keeps the image corners rounded */
         }
 
         .vibe-check { padding: 100px 0; background: #090D14; }
@@ -195,7 +198,8 @@
                 <div style="color: var(--muted); font-weight: 700; letter-spacing: 1px;">BYE BYE HANGOUT LOOP 👋</div>
             </div>
             <div class="phone-mockup">
-                <img src="mockup.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 33px;">
+                <img src="Screenshot_20260408-201830.jpg" 
+                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
         </section>
     </div>
