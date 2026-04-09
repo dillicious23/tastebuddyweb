@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tastebuddy — Dining Made Easy</title>
+    <title>tastebuddy | Group Dining Solved</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -33,6 +33,15 @@
             padding: 0 var(--safe-margin);
         }
 
+        /* --- Floating Emojis Background --- */
+        .emoji-bg {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
         /* --- Navigation --- */
         header {
             padding: 40px 0;
@@ -58,12 +67,14 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 14px;
-            transition: transform 0.2s;
+            transition: 0.3s;
         }
+
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2); }
 
         /* --- Hero --- */
         .hero {
-            padding: 60px 0 100px;
+            padding: 60px 0 120px;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 60px;
@@ -72,88 +83,126 @@
 
         .hero-text h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(40px, 8vw, 80px);
-            line-height: 0.95;
+            font-size: clamp(45px, 8vw, 85px);
+            line-height: 0.9;
             margin-bottom: 25px;
-            letter-spacing: -3px;
+            letter-spacing: -4px;
         }
 
         .hero-text h1 span { color: var(--green); display: block; }
 
         .hero-text p {
             color: var(--subtext);
-            font-size: 20px;
+            font-size: 22px;
             max-width: 500px;
             margin-bottom: 30px;
+            font-weight: 500;
         }
 
-        .tagline-badge {
-            font-family: 'Syne', sans-serif;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--muted);
-            border: 1px solid var(--muted);
-            padding: 6px 12px;
-            display: inline-block;
-            margin-bottom: 20px;
+        /* Mockup Frame */
+        .phone-mockup {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: linear-gradient(145deg, #141927, #070B0F);
+            border: 12px solid #1e2433;
+            border-radius: 45px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
-        /* --- Feature Highlights --- */
-        .features-detailed {
+        .phone-mockup::after {
+            content: '🍕';
+            font-size: 80px;
+            filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.4));
+        }
+
+        /* --- Vibe Check (Humor Section) --- */
+        .vibe-check {
             padding: 100px 0;
-            background: linear-gradient(to bottom, var(--bg), var(--card));
+            background: #090D14;
         }
 
-        .feature-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .feature-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 12px;
-        }
-
-        .feature-box h4 {
+        .section-label {
             font-family: 'Syne', sans-serif;
             color: var(--green);
-            margin-bottom: 10px;
-            font-size: 18px;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: block;
         }
+
+        .vibe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .vibe-card {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: 0.3s;
+        }
+
+        .vibe-card:hover { border-color: var(--green); }
+
+        .vibe-card span { font-size: 40px; display: block; margin-bottom: 20px; }
+
+        .vibe-card h3 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 10px; }
+
+        .vibe-card p { color: var(--subtext); font-size: 15px; }
 
         /* --- Steps Section --- */
         .steps {
-            padding: 100px 0;
-            background: var(--card);
+            padding: 120px 0;
         }
 
-        .step-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .step-row {
+            display: flex;
+            align-items: flex-start;
             gap: 40px;
-        }
-
-        .step-card {
-            padding: 40px;
-            border-left: 2px solid var(--green);
+            margin-bottom: 80px;
         }
 
         .step-num {
             font-family: 'Syne', sans-serif;
-            font-size: 14px;
-            color: var(--green);
-            margin-bottom: 20px;
-            display: block;
+            font-size: 60px;
             font-weight: 900;
+            color: var(--muted);
+            line-height: 1;
         }
 
-        .step-card h3 { font-family: 'Syne', sans-serif; font-size: 24px; margin-bottom: 15px; }
+        .step-content h3 { font-family: 'Syne', sans-serif; font-size: 36px; margin-bottom: 10px; }
+        .step-content p { font-size: 20px; color: var(--subtext); max-width: 600px; }
+
+        /* --- Detailed Features --- */
+        .features-detailed {
+            padding: 100px 0;
+            background: var(--card);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .feature-box {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .feature-icon { font-size: 32px; }
+
+        .feature-info h4 { font-family: 'Syne', sans-serif; font-size: 20px; margin-bottom: 8px; color: var(--green); }
+        .feature-info p { color: var(--subtext); }
 
         /* --- Stats Bar --- */
         .stats-bar {
@@ -163,59 +212,67 @@
             text-align: center;
         }
 
-        .stat-item h2 { font-family: 'Syne', sans-serif; font-size: 50px; color: var(--green); line-height: 1; }
-        .stat-item p { text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 700; font-size: 11px; }
+        .stat-item h2 { font-family: 'Syne', sans-serif; font-size: 65px; color: var(--green); line-height: 1; margin-bottom: 5px; }
+        .stat-item p { text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 800; font-size: 12px; }
 
         footer {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        @media (max-width: 768px) {
-            .hero, .feature-row, .step-grid { grid-template-columns: 1fr; }
-            .stats-bar { flex-direction: column; gap: 50px; }
+        .footer-logo { font-size: 50px; margin-bottom: 40px; }
+
+        @media (max-width: 850px) {
+            .hero, .vibe-grid, .feature-grid { grid-template-columns: 1fr; }
+            .hero { text-align: center; }
+            .hero-text p { margin: 0 auto 30px; }
+            .stats-bar { flex-direction: column; gap: 60px; }
+            .step-row { flex-direction: column; gap: 10px; margin-bottom: 60px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="emoji-bg" style="top: 15%; left: 5%;">🍔</div>
+    <div class="emoji-bg" style="top: 40%; right: 8%;">🍣</div>
+    <div class="emoji-bg" style="bottom: 20%; left: 10%;">🌮</div>
+    <div class="emoji-bg" style="top: 70%; right: 15%;">🍦</div>
+
     <div class="container">
         <header>
             <div class="logo">taste<em>buddy</em></div>
-            <a href="#download" class="btn-download">Get the App</a>
+            <a href="#download" class="btn-download">Download Free 📲</a>
         </header>
 
         <section class="hero">
             <div class="hero-text">
-                <span class="tagline-badge">Group Dining Solved</span>
-                <h1>Stop Arguing. <span>Start Eating.</span></h1>
-                <p>Break the hangout loop with the fastest group decision maker ever built. No accounts. No drama. Just food.</p>
+                <h1>Stop Arguing <span>Start Eating</span></h1>
+                <p>The fastest way to pick a restaurant with friends without the 45-minute group chat debate.</p>
+                <div class="handle" style="color: var(--muted); font-weight: 700; letter-spacing: 1px;">BYE BYE HANGOUT LOOP 👋</div>
             </div>
-            <div style="width: 100%; aspect-ratio: 9/16; background: #0B0F1A; border: 12px solid #141927; border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.8);"></div>
+            <div class="phone-mockup"></div>
         </section>
     </div>
 
-    <section class="features-detailed">
+    <section class="vibe-check">
         <div class="container">
-            <div class="feature-row">
-                <div class="feature-box">
-                    <h4>Verified Open Now</h4>
-                    <p>We only show you places that are actually ready for you. No more driving to a restaurant just to find the "Closed" sign.</p>
+            <span class="section-label">Current Mood</span>
+            <div class="vibe-grid">
+                <div class="vibe-card">
+                    <span>🍟</span>
+                    <h3>The Fry Tax</h3>
+                    <p>When you say "I'm not hungry" then proceed to eat 40% of their side order. We settle it so you get your own.</p>
                 </div>
-                <div class="feature-box">
-                    <h4>Strict Radius</h4>
-                    <p>Stop seeing results from 10 miles away. We keep it tight—if it's on the list, it's actually nearby.</p>
+                <div class="vibe-card">
+                    <span>🤤</span>
+                    <h3>Order Envy</h3>
+                    <p>That instant regret when their plate looks better than yours. We make sure everyone wins the menu game.</p>
                 </div>
-            </div>
-            <div class="feature-row">
-                <div class="feature-box">
-                    <h4>Zero Accounts</h4>
-                    <p>Send a link to your crew and they can swipe instantly. No sign-ups or profile setup required for the group.</p>
-                </div>
-                <div class="feature-box">
-                    <h4>100% Agreement</h4>
-                    <p>The argument ends when the app finds a match. We only show you the spots where every single person agreed.</p>
+                <div class="vibe-card">
+                    <span>🗺️</span>
+                    <h3>Table Tetris</h3>
+                    <p>Don't waste 2 hours deciding where to go just to find a tiny table. We find the right spots, fast.</p>
                 </div>
             </div>
         </div>
@@ -223,21 +280,65 @@
 
     <section class="steps">
         <div class="container">
-            <div class="step-grid">
-                <div class="step-card">
-                    <span class="step-num">STEP 01</span>
-                    <h3>Invite the Crew</h3>
-                    <p>Drop a link in the group chat to start a session. The whole group joins in a single tap.</p>
+            <span class="section-label">How it works</span>
+            
+            <div class="step-row">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <h3>Invite Everyone 👥</h3>
+                    <p>Drop a link in the group chat. Your friends join instantly. No accounts, no sign-ups, and no friction.</p>
                 </div>
-                <div class="step-card">
-                    <span class="step-num">STEP 02</span>
-                    <h3>Everyone Swipes</h3>
-                    <p>Swipe on nearby restaurants. It's real-time, high-stakes, and surprisingly fun.</p>
+            </div>
+
+            <div class="step-row">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <h3>Swipe on Food 🍕</h3>
+                    <p>Everyone swiper on nearby spots in real-time. It's like a game, but the prize is a meal you actually want.</p>
                 </div>
-                <div class="step-card">
-                    <span class="step-num">STEP 03</span>
-                    <h3>Go Eat</h3>
-                    <p>Instantly see where everyone agreed. Decision made, drama averted, food imminent.</p>
+            </div>
+
+            <div class="step-row">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <h3>It's a Match! 🎉</h3>
+                    <p>We only show you the places everyone agreed on. No more vetoes. No more drama. Just go eat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-detailed">
+        <div class="container">
+            <span class="section-label">Why it's better</span>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">✅</div>
+                    <div class="feature-info">
+                        <h4>Verified Open Now</h4>
+                        <p>We check the hours so you don't show up to a "Closed" sign. Real-time accuracy only.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-info">
+                        <h4>Strict Radius</h4>
+                        <p>Stop seeing restaurants 20 miles away. If it's on Tastebuddy, it's actually nearby.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-info">
+                        <h4>100% Agreement</h4>
+                        <p>The decision is only made when everyone says yes. No one is left out of the loop.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-info">
+                        <h4>Real-Time Matches</h4>
+                        <p>See matches the second they happen. No waiting around for your friends to refresh.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -260,9 +361,10 @@
         </section>
 
         <footer id="download">
-            <div class="logo" style="font-size: 40px; margin-bottom: 20px;">taste<em>buddy</em></div>
-            <p style="color: var(--muted); margin-bottom: 30px;">Available on iOS & Android</p>
-            <div class="handle">@usetastebuddy</div>
+            <div class="logo footer-logo">taste<em>buddy</em></div>
+            <p style="color: var(--subtext); margin-bottom: 20px; font-size: 18px; font-weight: 500;">Ready to end the "You pick" argument?</p>
+            <a href="#" class="btn-download" style="font-size: 18px; padding: 15px 40px;">Get it for iOS & Android 🚀</a>
+            <div class="handle" style="margin-top: 50px; color: var(--muted); font-weight: 700;">@usetastebuddy</div>
         </footer>
     </div>
 
